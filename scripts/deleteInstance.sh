@@ -1,21 +1,21 @@
 #!/bin/bash
 # Autor: I. Kuss, hbz
 # Anlagedatum: 23.11.2020
-# Löscht ein Folio-Exemplar.
+# Löscht einen Folio-Titelsatz (Instance)
 source funktionen.sh
 
 usage() {
   cat <<EOF
-  Löscht ein Folio-Exemplar.
-  1. Aufruf ohne Optionen : Löscht ein Exemplar anhand einer Item-ID.
-     Aufruf:                ./deleteItem.sh itemId
+  Löscht eine Folio-Titelaufnahme (Instance).
+  1. Aufruf ohne Optionen : Löscht einen Titel anhand seiner ID.
+     Aufruf:                ./deleteInstance.sh instanceId
      benötigt: login.json im gleichen Verzeichnis.
-     Beispielaufruf:        ./deleteItem.sh 9ec4aea2-b4f7-5ab0-bf54-87a66f135bbd
-  2. Aufruf mit Parameteroption -f : Löscht ein Exemplar anahnd einer Datei im Format FOLIO-JSON. Parst Item-ID aus Datei.
-     Beispielaufruf:        ./deleteItem.sh -f ~/folio-mig/sample_input/items/4711.json
+     Beispielaufruf:        ./deleteInstance.sh 7433c70e-8887-550b-a048-0e421ad628f2
+  2. Aufruf mit Parameteroption -f : Löscht einen Titel anahnd einer Datei im Format FOLIO-JSON. Parst Item-ID aus Datei.
+     Beispielaufruf:        ./deleteInstance.sh -f ~/folio-mig/sample_input/instances/1890.json
 
   Optionen:
-   - f [Datei]      Item-ID wird aus Datei gelesen
+   - f [Datei]      ID wird aus Datei gelesen
    - h              Hilfe (dieser Text)
    - l [Datei]      login.json Datei mit Inhalt { "tenant" : "...", "username" : "...", "password" : "..." },
                     Standard $login_datei
@@ -77,7 +77,7 @@ if [ $useFile == 1 ]; then
 else
   id=$1
 fi
-echo "Lösche Exemplar id=$id"
+echo "Lösche Titeldatensatz id=$id"
 
 curlopts=""
 if [ $silent_off != 1 ]; then
@@ -87,7 +87,7 @@ if [ $verbose == 1 ]; then
   curlopts="$curlopts -v"
 fi
 TOKEN=$( curl -s -S -D - -H "X-Okapi-Tenant: $TENANT" -H "Content-type: application/json" -H "Accept: application/json" -d @$login_datei $OKAPI/authn/login | grep -i "^x-okapi-token: " )
-curl $curlopts -S -X DELETE -H "$TOKEN" -H "X-Okapi-Tenant: $TENANT" -H "Content-type: application/json; charset=utf-8" $OKAPI/item-storage/items/$id
+curl $curlopts -S -X DELETE -H "$TOKEN" -H "X-Okapi-Tenant: $TENANT" -H "Content-type: application/json; charset=utf-8" $OKAPI/inventory/instances/$id
 echo
 
 exit 0

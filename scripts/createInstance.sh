@@ -1,39 +1,30 @@
 #!/bin/bash
 # Autor: I. Kuss, hbz
 # Anlagedatum: 23.11.2020
-# Löscht ein Folio-Exemplar.
+# Legt einen Folio-Titeldatensatz (Instance) an.
 source funktionen.sh
 
 usage() {
   cat <<EOF
-  Löscht ein Folio-Exemplar.
-  1. Aufruf ohne Optionen : Löscht ein Exemplar anhand einer Item-ID.
-     Aufruf:                ./deleteItem.sh itemId
-     benötigt: login.json im gleichen Verzeichnis.
-     Beispielaufruf:        ./deleteItem.sh 9ec4aea2-b4f7-5ab0-bf54-87a66f135bbd
-  2. Aufruf mit Parameteroption -f : Löscht ein Exemplar anahnd einer Datei im Format FOLIO-JSON. Parst Item-ID aus Datei.
-     Beispielaufruf:        ./deleteItem.sh -f ~/folio-mig/sample_input/items/4711.json
+  Legt einen Folio-Titeldatensatz (Instance) an.
+  Anlage anahnd einer Datei im Format FOLIO-JSON.
+  Beispielaufruf:        ./createInstance.sh -f ~/folio-mig/sample_input/instances/1890.json
 
   Optionen:
-   - f [Datei]      Item-ID wird aus Datei gelesen
+   - f [Datei]      Titeldaten im Format FOLIO-JSON
    - h              Hilfe (dieser Text)
    - l [Datei]      login.json Datei mit Inhalt { "tenant" : "...", "username" : "...", "password" : "..." },
-                    Standard $login_datei
+                    Standardwert: $login_datei
    - o [OKAPI_URL]  OKAPI_URL, Default: $OKAPI
-   - s              silent off (nicht still), Standard: $silent_off
+   - s              silent off (nicht still), Standardwert: $silent_off
    - t [TENANT]     TENANT, Default: $TENANT
-   - v              verbose (gesprächig), Standard: $verbose
-  
-  Parameter:
-    \$1 : Item-ID
-  
+   - v              verbose (gesprächig), Standardwert: $verbose
 EOF
   exit 0
   }
 
 # Default-Werte
-useFile=0
-folio_json_file=""
+folio_json_datei=""
 verbose=0
 silent_off=0
 OKAPI=https://folio-hbz1.hbz-nrw.de/okapi
@@ -44,8 +35,7 @@ login_datei="login.json"
 OPTIND=1         # Reset in case getopts has been used previously in the shell.
 while getopts "f:h?l:o:st:v" opt; do
     case "$opt" in
-    f)  useFile=1
-				folio_json_file=$OPTARG
+    f)  folio_json_datei=$OPTARG
         ;;
     h|\?) usage
         ;;
@@ -65,19 +55,12 @@ shift $((OPTIND-1))
 [ "${1:-}" = "--" ] && shift
 
 # Beginn der Hauptverarbeitung
-id=""
-if [ $useFile == 1 ]; then
-  echo "Datei=$folio_json_file"
-  if [ ! -f $folio_json_file ]; then
-    echo "ERROR: ($folio_json_file) ist keine reguläre Datei!"
-    exit 0
-  fi
-  id=`cat $folio_json_file | jq ".id"`
-  id=$(stripOffQuotes $id)
-else
-  id=$1
+if [ ! -f $folio_json_datei ]; then
+  echo "ERROR: ($folio_json_datei) ist keine reguläre Datei !"
+  exit 0
 fi
-echo "Lösche Exemplar id=$id"
+
+echo "Lege Titeldatensatz an anhand von Datei: $folio_json_datei"
 
 curlopts=""
 if [ $silent_off != 1 ]; then
@@ -86,8 +69,9 @@ fi
 if [ $verbose == 1 ]; then
   curlopts="$curlopts -v"
 fi
+
 TOKEN=$( curl -s -S -D - -H "X-Okapi-Tenant: $TENANT" -H "Content-type: application/json" -H "Accept: application/json" -d @$login_datei $OKAPI/authn/login | grep -i "^x-okapi-token: " )
-curl $curlopts -S -X DELETE -H "$TOKEN" -H "X-Okapi-Tenant: $TENANT" -H "Content-type: application/json; charset=utf-8" $OKAPI/item-storage/items/$id
+curl $curlopts -S -X POST -H "$TOKEN" -H "X-Okapi-Tenant: $TENANT" -H "Content-type: application/json; charset=utf-8" -H "Accept: application/json" -d \@$folio_json_datei $OKAPI/inventory/instances
 echo
 
 exit 0
