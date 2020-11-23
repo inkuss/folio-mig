@@ -3,11 +3,11 @@
 
 usage() {
   cat <<EOF
-  Löscht Folio-Exemplare
-  Beispielaufruf:        ./deleteItems.sh -d ~/folio-mig/sample_input/items
+  Legt Folio-Lokalsätze (Holdings) an
+  Beispielaufruf:        ./createHoldings.sh -d ~/folio-mig/sample_input/holdings
 
   Optionen:
-   - d [Verzeichnis]    Verzeichnis mit Item-Dateien (Format: FOLIO-JSON)
+   - d [Verzeichnis]    Verzeichnis mit Holdings-Dateien (Format: FOLIO-JSON)
    - h                  Hilfe (dieser Text)
 EOF
   exit 0
@@ -29,7 +29,7 @@ shift $((OPTIND-1))
 # Beginn der Hauptverarbeitung
 inputDir=$directory
 for item in $inputDir/*.json; do
-  ./deleteItem.sh -f $item
+  ./createHolding.sh -f $item
 done
 
 exit 0

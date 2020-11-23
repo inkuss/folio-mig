@@ -27,8 +27,8 @@ shift $((OPTIND-1))
 [ "${1:-}" = "--" ] && shift
 
 # Beginn der Hauptverarbeitung
-outputDir=$directory
-for item in $outputDir/*.json; do
+inputDir=$directory
+for item in $inputDir/*.json; do
   ./createItem.sh -f $item
 done
 
