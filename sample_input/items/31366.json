@@ -1,0 +1,19 @@
+{
+   "hrid" : "31366",
+   "permanentLocationId" : "fef6f155-31e4-4cac-a47b-a83f24b252a0",
+   "copyNumber" : "001",
+   "permanentLoanTypeId" : "5692d134-3e84-4540-ab0b-bad5473af0e5",
+   "itemLevelCallNumberSuffix" : "-3-",
+   "itemLevelCallNumberPrefix" : "1/",
+   "status" : {
+      "name" : "Available"
+   },
+   "itemLevelCallNumberTypeId" : "c4014ca6-17a0-4ba6-9bc7-5c2ed24c74ff",
+   "holdingsRecordId" : "f60e8aad-972e-5429-a22f-6242f7ca00c6",
+   "barcode" : "00031366",
+   "itemIdentifier" : "31366",
+   "materialTypeId" : "d9acad2f-2aac-4b48-9097-e6ab85906b25",
+   "accessionNumber" : "88/779",
+   "itemLevelCallNumber" : "45847",
+   "id" : "0fb74323-9ef9-5d19-9d71-59d6cacad8b0"
+}

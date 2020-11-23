@@ -1,0 +1,52 @@
+{
+   "@context" : "http://localhost:9130/inventory/instances/context",
+   "source" : "FOLIO",
+   "title" : "Annäherung - an sieben Komponistinnen : mit Berichten, Interviews u. Selbstdarstellungen ; (Hrsg.) Brunhilde Sonntag u. Renate Matthei",
+   "modeOfIssuanceId" : "d70fd3e8-2c0a-49b5-8078-e85f242c6b5a",
+   "hrid" : "1890",
+   "contributors" : [
+      {
+         "name" : "Sonntag, Brunhilde",
+         "primary" : false,
+         "contributorNameTypeId" : "2b94c631-fca9-4892-a730-03ee529ffe2a",
+         "contributorTypeText" : "Herausgeber(in)",
+         "contributorTypeId" : "f89f0dd1-878f-4d42-93f8-fee5b58e0658"
+      },
+      {
+         "contributorNameTypeId" : "2b94c631-fca9-4892-a730-03ee529ffe2a",
+         "primary" : false,
+         "name" : "Matthei, Renate",
+         "contributorTypeId" : "f89f0dd1-878f-4d42-93f8-fee5b58e0658",
+         "contributorTypeText" : "Herausgeber(in)"
+      }
+   ],
+   "identifiers" : [
+      {
+         "value" : "1890",
+         "identifierTypeId" : "4c3fc775-e5c5-4374-af49-5adc7df97700"
+      }
+   ],
+   "natureOfContentTermIds" : [
+      "2643ec6c-c41b-4eb3-a9fd-521003b4e8c9"
+   ],
+   "notes" : [
+      {
+         "instanceNoteTypeId" : "635bf1ff-c6d4-4f09-bf39-9c42bfd0102c",
+         "staffOnly" : false,
+         "note" : "Schriftenkennzeichen"
+      }
+   ],
+   "instanceTypeId" : "6312d172-f0cf-40f6-b27d-9fa8feaf332f",
+   "id" : "7433c70e-8887-550b-a048-0e421ad628f2",
+   "physicalDescriptions" : [
+      "Illus.: 120"
+   ],
+   "publication" : [
+      {
+         "role" : "Herausgeber",
+         "place" : "Kassel",
+         "dateOfPublication" : "1987-",
+         "publisher" : "Furore-Verl."
+      }
+   ]
+}

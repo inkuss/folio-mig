@@ -1,0 +1,17 @@
+{
+   "permanentLoanTypeId" : "5692d134-3e84-4540-ab0b-bad5473af0e5",
+   "itemLevelCallNumberTypeId" : "f1618a3a-2ad2-44eb-9fb3-fc740ff9d362",
+   "status" : {
+      "name" : "Available"
+   },
+   "hrid" : "91514",
+   "copyNumber" : "003",
+   "permanentLocationId" : "fef6f155-31e4-4cac-a47b-a83f24b252a0",
+   "accessionNumber" : "98/4625",
+   "itemIdentifier" : "91514",
+   "materialTypeId" : "d9acad2f-2aac-4b48-9097-e6ab85906b25",
+   "id" : "8b383321-5282-5f0c-86e7-8493f5b2c2e2",
+   "itemLevelCallNumber" : "MusZg",
+   "holdingsRecordId" : "f60e8aad-972e-5429-a22f-6242f7ca00c6",
+   "barcode" : "00091514"
+}

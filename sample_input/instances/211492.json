@@ -1,0 +1,44 @@
+{
+   "publication" : [
+      {
+         "publisher" : "Hoffmann und Campe",
+         "dateOfPublication" : "1995",
+         "place" : "Hamburg",
+         "role" : "Herausgeber"
+      }
+   ],
+   "id" : "d7acfcb7-58e0-587e-9a92-fd6b10114226",
+   "instanceTypeId" : "6312d172-f0cf-40f6-b27d-9fa8feaf332f",
+   "physicalDescriptions" : [
+      "Illus.: 800",
+      "Umfang: 130 S."
+   ],
+   "notes" : [
+      {
+         "note" : "Schriftenkennzeichen",
+         "staffOnly" : false,
+         "instanceNoteTypeId" : "635bf1ff-c6d4-4f09-bf39-9c42bfd0102c"
+      }
+   ],
+   "identifiers" : [
+      {
+         "value" : "211492",
+         "identifierTypeId" : "4c3fc775-e5c5-4374-af49-5adc7df97700"
+      },
+      {
+         "value" : "3-455-29506-1",
+         "identifierTypeId" : "8261054f-be78-422d-bd51-4ed9f33c3422"
+      }
+   ],
+   "natureOfContentTermIds" : [
+      "2643ec6c-c41b-4eb3-a9fd-521003b4e8c9"
+   ],
+   "subjects" : [
+      "Tunesien"
+   ],
+   "modeOfIssuanceId" : "eb118829-b540-4bd6-b585-1d51fd570890",
+   "title" : "Tunesien :  ; ",
+   "hrid" : "211492",
+   "source" : "FOLIO",
+   "@context" : "http://localhost:9130/inventory/instances/context"
+}

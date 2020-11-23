@@ -1,0 +1,22 @@
+{
+   "copyNumber" : "003",
+   "permanentLocationId" : "f4bb4e59-6cff-417f-b3eb-b9b4fa2ffda3",
+   "hrid" : "91512",
+   "status" : {
+      "name" : "Available"
+   },
+   "permanentLoanTypeId" : "5692d134-3e84-4540-ab0b-bad5473af0e5",
+   "notes" : [
+      {
+         "itemNoteTypeId" : "d38eb1a6-0285-45a3-add3-cedec977fc11",
+         "note" : "Lambrecht / Noten- u. Schallarch.",
+         "staffOnly" : true
+      }
+   ],
+   "barcode" : "00091512",
+   "holdingsRecordId" : "bede57e0-ef63-571a-a6e6-ce48f1240368",
+   "id" : "a76eab26-48c9-5b47-b4e1-a5e003cdbabf",
+   "itemIdentifier" : "91512",
+   "materialTypeId" : "d9acad2f-2aac-4b48-9097-e6ab85906b25",
+   "accessionNumber" : "98/4626"
+}

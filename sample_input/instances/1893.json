@@ -1,0 +1,40 @@
+{
+   "physicalDescriptions" : [
+      "Illus.: 120",
+      "Umfang: 64 S."
+   ],
+   "instanceTypeId" : "6312d172-f0cf-40f6-b27d-9fa8feaf332f",
+   "id" : "503b0af1-d402-56b2-b93c-29af42949db6",
+   "subjects" : [
+      "Komponistin",
+      "Thieme, Kerstin",
+      "Schmidt, Mia",
+      "Shlonsky, Verdina",
+      "Kuyper, Elisabeth",
+      "Smyth, Ethel",
+      "Wen-Hui, Tu",
+      "Fontyn, Jacqueline"
+   ],
+   "identifiers" : [
+      {
+         "value" : "1893",
+         "identifierTypeId" : "4c3fc775-e5c5-4374-af49-5adc7df97700"
+      },
+      {
+         "identifierTypeId" : "8261054f-be78-422d-bd51-4ed9f33c3422",
+         "value" : "3-9801326-5-X"
+      }
+   ],
+   "notes" : [
+      {
+         "staffOnly" : false,
+         "instanceNoteTypeId" : "635bf1ff-c6d4-4f09-bf39-9c42bfd0102c",
+         "note" : "Schriftenkennzeichen"
+      }
+   ],
+   "source" : "FOLIO",
+   "@context" : "http://localhost:9130/inventory/instances/context",
+   "hrid" : "1893",
+   "modeOfIssuanceId" : "28c56c2b-8fa6-4470-84eb-a6e91f5aec30",
+   "title" : "Kerstin Thieme, Ethel Smyth, Mia Schmidt, Verdina Shlonsky, Elisabeth Kuyper, Tu Wen-Hui, Jacqueline Fontyn :  ; "
+}

@@ -1,0 +1,45 @@
+{
+   "instanceTypeId" : "6312d172-f0cf-40f6-b27d-9fa8feaf332f",
+   "id" : "cbcfa7a1-2547-57a0-bb52-45b4de38e466",
+   "physicalDescriptions" : [
+      "Illus.: 120",
+      "Umfang: 64 S."
+   ],
+   "title" : "Barbara Heller, Aleida Montijn, Alice Samter, Eva Schorr, Brunhilde Sonntag, Erna Woll, Ruth Zechlin :  ; ",
+   "modeOfIssuanceId" : "28c56c2b-8fa6-4470-84eb-a6e91f5aec30",
+   "hrid" : "1891",
+   "source" : "FOLIO",
+   "@context" : "http://localhost:9130/inventory/instances/context",
+   "notes" : [
+      {
+         "note" : "Schriftenkennzeichen",
+         "staffOnly" : false,
+         "instanceNoteTypeId" : "635bf1ff-c6d4-4f09-bf39-9c42bfd0102c"
+      },
+      {
+         "instanceNoteTypeId" : "74c3250f-1d65-48b8-acb5-6de10a00a5d8",
+         "staffOnly" : false,
+         "note" : "BIS"
+      }
+   ],
+   "identifiers" : [
+      {
+         "value" : "1891",
+         "identifierTypeId" : "4c3fc775-e5c5-4374-af49-5adc7df97700"
+      },
+      {
+         "identifierTypeId" : "8261054f-be78-422d-bd51-4ed9f33c3422",
+         "value" : "3-9801326-3-3"
+      }
+   ],
+   "subjects" : [
+      "Heller, Barbara",
+      "Montijn, Aleida",
+      "Samter, Alice",
+      "Schorr, Eva",
+      "Sonntag, Brunhilde",
+      "Woll, Erna",
+      "Zechlin, Ruth",
+      "Komponistin"
+   ]
+}
