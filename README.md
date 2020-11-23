@@ -1,19 +1,20 @@
 # folio-mig
 Migrationsskripte und -werkzeuge für Folio Open Source Library System
 
-# Hereinladen einer kompletten Beispiel Sequenz Titel - Lokaldaten - Exemplare
+# Hereinladen einer kompletten Beispielsequenz Titel - Lokaldaten - Exemplare
 - mit Titelbeziehungen (Über- und Unterordnungen)
-- aus den Beispieldaten (FOLIO-JSON)
+- aus den Beispieldaten im Repo (FOLIO-JSON)
 
-./createInstances.sh -h
-  Legt Folio-Titeldatensätze an
-  Beispielaufruf:        ./createInstances.sh -d ~/folio-mig/sample_input/instances
+./createInstances.sh -d ~/folio-mig/sample_input/instances 
+./createInstanceRelationships.sh -d ~/folio-mig/sample_input/instanceRelationships 
+./createHoldings.sh -d ~/folio-mig/sample_input/holdings 
+./createItems.sh -d ~/folio-mig/sample_input/items 
 
-  Optionen:
-   - d [Verzeichnis]    Verzeichnis mit Titeldaten (Format: FOLIO-JSON)
-   - h                  Hilfe (dieser Text)
+# Löschen der kompletten Beispielsequenz
+- das Löschen ist in umgekehrter Reihenfolge vorzunehmen; so:
 
-./createInstances.sh -d ~/folio-mig/sample_input/instances
-./createInstanceRelationships.sh -d ~/folio-mig/sample_input/instanceRelationships
-./createHoldings.sh -d ~/folio-mig/sample_input/holdings
-./createItems.sh -d ~/folio-mig/sample_input/items
+./deleteItems.sh -d ~/folio-mig/sample_input/items 
+./deleteHoldings.sh -d ~/folio-mig/sample_input/holdings 
+./deleteInstanceRelationships.sh -d ~/folio-mig/sample_input/instanceRelationships 
+./deleteInstances.sh -d ~/folio-mig/sample_input/instances 
+ 
