@@ -10,6 +10,7 @@ Migrationsskripte und -werkzeuge für Folio Open Source Library System
 ./createInstanceRelationships.sh -d ~/folio-mig/sample_input/instanceRelationships 
 ./createHoldings.sh -d ~/folio-mig/sample_input/holdings 
 ./createItems.sh -d ~/folio-mig/sample_input/items
+grep error createItems.log
 ```
 
 ## Löschen der kompletten Beispielsequenz
