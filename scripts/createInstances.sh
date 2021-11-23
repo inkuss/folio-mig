@@ -31,7 +31,7 @@ login_datei="login.json"
 OPTIND=1         # Reset in case getopts has been used previously in the shell.
 while getopts "d:h?l:o:st:v" opt; do
     case "$opt" in
-    f)  directory=$OPTARG
+    d)  directory=$OPTARG
         ;;
     h|\?) usage
         ;;
@@ -88,7 +88,7 @@ cat >> $inputDir/createInstances.json <<TAIL
 }
 TAIL
 echo "Ladedatei $inputDir/createInstances.json angelegt."
-echo "WARNUNG: Anzahl Titeldatensäzte wurde auf 100 begrenzt !!"
+echo "WARNUNG: Anzahl Titeldatensätze wurde auf 100 begrenzt !!"
 
 # Use a POST to  /instance-storage/batch/synchronous
 TOKEN=$( curl -s -S -D - -H "X-Okapi-Tenant: $TENANT" -H "Content-type: application/json" -H "Accept: application/json" -d @$login_datei $OKAPI/authn/login | grep -i "^x-okapi-token: " )

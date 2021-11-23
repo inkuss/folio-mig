@@ -6,7 +6,7 @@ usage() {
   cat <<EOF
   Löscht Folio-Titeldatensätze
   Beispielaufrufe:       ./deleteInstances.sh -d ~/folio-mig/sample_input/instances
-  Beispielaufrufe:       ./deleteInstances.sh -f ~/folio-mig/sample_input/instances/createInstances.json
+                         ./deleteInstances.sh -f ~/folio-mig/sample_input/instances/createInstances.json
 
   Optionen:
    - d [Verzeichnis]    Verzeichnis mit Titeldaten (Format: FOLIO-JSON)
