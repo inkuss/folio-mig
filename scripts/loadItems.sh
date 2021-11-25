@@ -1,15 +1,15 @@
 #!/bin/bash
 # Autor: I. Kuss, hbz
-# Legt FOLIO-Exemplardatensätze an
+# Legt FOLIO-Exemplardatensätze anhand von Ladedateien an
 
 usage() {
   cat <<EOF
-  Legt Folio-Exemplare an
+  Legt Folio-Exemplardatensätze an
   Beispielaufruf:        ./createItems.sh -d ~/folio-mig/sample_input/items
 
   Optionen:
-   - d [Verzeichnis]    Verzeichnis mit Item-Dateien (Format: FOLIO-JSON)
-   - h                  Hilfe (dieser Text)
+   - d [Verzeichnis] Verzeichnis mit Ladedateien für Exemplardaten (Format: FOLIO-JSON)
+   - h              Hilfe (dieser Text)
    - l [Datei]      login.json Datei mit Inhalt { "tenant" : "...", "username" : "...", "password" : "..." },
                     Standardwert: $login_datei
    - o [OKAPI_URL]  OKAPI_URL, Default: $OKAPI
@@ -56,7 +56,7 @@ if [ ! -d $directory ]; then
   exit 0
 fi
 
-echo "Lege Exemplardatensätze an anhand von JSON-Dateien im Verzeichnis: $directory"
+echo "Lege Titeldatensätze an anhand von Ladedateien im Verzeichnis: $directory"
 
 curlopts=""
 if [ $silent_off != 1 ]; then
@@ -66,32 +66,14 @@ if [ $verbose == 1 ]; then
   curlopts="$curlopts -v"
 fi
 
-inputDir=$directory
-zaehler=1
-# Schreibe mal 100 Exemplardatensätze in eine Datei
-cat > $inputDir/createItems.json <<HEAD
-{
-  "items": [
-HEAD
-for item in $inputDir/*.json; do
-  echo "Zaehler: $zaehler"
-  cat $item >> $inputDir/createItems.json
-  zaehler=`expr $zaehler + 1`
-  if [ "$zaehler" -gt 100 ]; then
-    break
-  fi
-  echo "," >> $inputDir/createItems.json
-done
-cat >> $inputDir/createItems.json <<TAIL
-  ]
-}
-TAIL
-echo "Ladedatei $inputDir/createItems.json angelegt."
-echo "WARNUNG: Anzahl Exemplardatensätze wurde auf 100 begrenzt !!"
-
-# Use a POST to  /items-storage/batch/synchronous
 TOKEN=$( curl -s -S -D - -H "X-Okapi-Tenant: $TENANT" -H "Content-type: application/json" -H "Accept: application/json" -d @$login_datei $OKAPI/authn/login | grep -i "^x-okapi-token: " )
-curl $curlopts -S -X POST -H "$TOKEN" -H "X-Okapi-Tenant: $TENANT" -H "Content-type: application/json; charset=utf-8" -H "Accept: application/json" -d \@$inputDir/createItems.json $OKAPI/items-storage/batch/synchronous
-echo
-
+cd $directory
+loadfile_basename="loadfile"
+for loadfile in $loadfile_basename"_"*".js"; do
+  echo "Ladedatei gefunden: $loadfile"
+  # Use a POST to  /items-storage/batch/synchronous
+  echo "BEGINN Laden :" `date`
+  curl $curlopts -S -X POST -H "$TOKEN" -H "X-Okapi-Tenant: $TENANT" -H "Content-type: application/json; charset=utf-8" -H "Accept: application/json" -d \@$directory/$loadfile $OKAPI/item-storage/batch/synchronous
+  echo "ENDE Laden :" `date`
+done
 exit 0

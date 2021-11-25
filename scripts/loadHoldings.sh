@@ -1,14 +1,14 @@
 #!/bin/bash
 # Autor: I. Kuss, hbz
-# Legt FOLIO-Titeldatensätze an
+# Legt FOLIO-Lokaldatensätze anhand von Ladedateien an
 
 usage() {
   cat <<EOF
-  Legt Folio-Titeldatensätze an
-  Beispielaufruf:        ./createInstances.sh -d ~/folio-mig/sample_input/instances
+  Legt Folio-Lokaldatensätze an
+  Beispielaufruf:        ./createHoldings.sh -d ~/folio-mig/sample_input/holdings
 
   Optionen:
-   - d [Verzeichnis] Verzeichnis mit Titeldaten (Format: FOLIO-JSON)
+   - d [Verzeichnis] Verzeichnis mit Ladedateien für Lokaldaten (Format: FOLIO-JSON)
    - h              Hilfe (dieser Text)
    - l [Datei]      login.json Datei mit Inhalt { "tenant" : "...", "username" : "...", "password" : "..." },
                     Standardwert: $login_datei
@@ -56,7 +56,7 @@ if [ ! -d $directory ]; then
   exit 0
 fi
 
-echo "Lege Titeldatensätze an anhand von JSON-Dateien im Verzeichnis: $directory"
+echo "Lege Titeldatensätze an anhand von Ladedateien im Verzeichnis: $directory"
 
 curlopts=""
 if [ $silent_off != 1 ]; then
@@ -66,33 +66,14 @@ if [ $verbose == 1 ]; then
   curlopts="$curlopts -v"
 fi
 
-inputDir=$directory
-zaehler=1
-# Schreibe mal 100 Titeldatensätze in eine Datei
-cat > $inputDir/createInstances.json <<HEAD
-{
-  "instances": [
-HEAD
-for instance in $inputDir/*.json; do
-  echo "Zaehler: $zaehler"
-  # ./createInstance.sh -f $instance
-  cat $instance >> $inputDir/createInstances.json
-  zaehler=`expr $zaehler + 1`
-  if [ "$zaehler" -gt 100 ]; then
-    break
-  fi
-  echo "," >> $inputDir/createInstances.json
-done
-cat >> $inputDir/createInstances.json <<TAIL
-  ]
-}
-TAIL
-echo "Ladedatei $inputDir/createInstances.json angelegt."
-echo "WARNUNG: Anzahl Titeldatensätze wurde auf 100 begrenzt !!"
-
-# Use a POST to  /instance-storage/batch/synchronous
 TOKEN=$( curl -s -S -D - -H "X-Okapi-Tenant: $TENANT" -H "Content-type: application/json" -H "Accept: application/json" -d @$login_datei $OKAPI/authn/login | grep -i "^x-okapi-token: " )
-curl $curlopts -S -X POST -H "$TOKEN" -H "X-Okapi-Tenant: $TENANT" -H "Content-type: application/json; charset=utf-8" -H "Accept: application/json" -d \@$inputDir/createInstances.json $OKAPI/instance-storage/batch/synchronous
-echo
-
+cd $directory
+loadfile_basename="loadfile"
+for loadfile in $loadfile_basename"_"*".js"; do
+  echo "Ladedatei gefunden: $loadfile"
+  # Use a POST to  /holdings-storage/batch/synchronous
+  echo "BEGINN Laden :" `date`
+  curl $curlopts -S -X POST -H "$TOKEN" -H "X-Okapi-Tenant: $TENANT" -H "Content-type: application/json; charset=utf-8" -H "Accept: application/json" -d \@$directory/$loadfile $OKAPI/holdings-storage/batch/synchronous
+  echo "ENDE Laden :" `date`
+done
 exit 0

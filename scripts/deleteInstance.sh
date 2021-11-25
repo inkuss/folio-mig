@@ -36,7 +36,7 @@ useFile=0
 folio_json_file=""
 verbose=0
 silent_off=0
-OKAPI=https://folio-hbz1.hbz-nrw.de/okapi
+OKAPI=http://localhost:9130
 TENANT="diku";
 login_datei="login.json"
 
@@ -45,7 +45,7 @@ OPTIND=1         # Reset in case getopts has been used previously in the shell.
 while getopts "f:h?l:o:st:v" opt; do
     case "$opt" in
     f)  useFile=1
-				folio_json_file=$OPTARG
+	folio_json_file=$OPTARG
         ;;
     h|\?) usage
         ;;

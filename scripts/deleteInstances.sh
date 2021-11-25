@@ -20,6 +20,7 @@ usage() {
                           ]
                         }
    - h                  Hilfe (dieser Text)
+   - t [TENANT]         TENANT, Default: $TENANT
 EOF
   exit 0
   }
@@ -27,10 +28,11 @@ EOF
 # Default-Werte
 useFile=0
 useDirectory=0
+TENANT="diku"
 
 # Auswertung der Optionen und Kommandozeilenparameter
 OPTIND=1         # Reset in case getopts has been used previously in the shell.
-while getopts "d:f:h?" opt; do
+while getopts "d:f:h?t:" opt; do
     case "$opt" in
     d)  useDirectory=1
         directory=$OPTARG
@@ -40,12 +42,16 @@ while getopts "d:f:h?" opt; do
         ;;
     h|\?) usage
         ;;
+    t)  TENANT=$OPTARG
+	;;
     esac
 done
 shift $((OPTIND-1))
 [ "${1:-}" = "--" ] && shift
 
 # Beginn der Hauptverarbeitung
+echo "BEGINN Deleting instance records:" `date`
+zaehler=0
 if [ $useFile == 1 ]; then
   echo "Datei=$file"
   if [ ! -f $file ]; then
@@ -53,18 +59,20 @@ if [ $useFile == 1 ]; then
     exit 0
   fi
   for id in `cat $file | jq ".instances[].id"`; do
+    zaehler=`expr $zaehler + 1`
     id=$(stripOffQuotes $id)
     echo "Deleting ID: $id ..."
-    # hier dann auch wirklich löschen
-    echo "hier dann auch wirklich löschen..."
-    # ./deleteInstance.sh $id
+    ./deleteInstance.sh -t $TENANT $id
   done
 elif [ $useDirectory ==1 ]; then
   for instance in $directory/*.json; do
-    ./deleteInstance.sh -f $instance
+    zaehler=`expr $zaehler + 1`
+    ./deleteInstance.sh -t $TENANT -f $instance
   done
 else
   echo "ERROR: Neither a file nor a directory was specified ! Nothing done." 
 fi
+echo "Number of instance records that have been deleted: $zaehler"
+echo "ENDE Deleting instance records:" `date`
 
 exit 0
