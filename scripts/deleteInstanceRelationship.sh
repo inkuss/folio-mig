@@ -37,7 +37,7 @@ useFile=0
 folio_json_file=""
 verbose=0
 silent_off=0
-OKAPI=https://folio-hbz1.hbz-nrw.de/okapi
+OKAPI=http://localhost:9130
 TENANT="diku";
 login_datei="login.json"
 

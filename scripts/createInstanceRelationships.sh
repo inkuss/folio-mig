@@ -37,7 +37,7 @@ shift $((OPTIND-1))
 echo "BEGINN Erzeuge FOLIO-Instanzbeziehungen: " `date`
 inputDir=$directory
 for IR in $inputDir/*.json; do
-  ./createInstanceRelationship.sh -t $TENANT -f $IR
+  ./createInstanceRelationship.sh -s -v -t $TENANT -f $IR
 done
 echo "ENDE Erzeuge FOLIO-Instanzbeziehungen: " `date`
 
