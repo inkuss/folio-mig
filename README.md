@@ -29,25 +29,29 @@ The sample inventory data in sample_inventory/ will create the following invento
 # folio-mig
 Migrationsskripte und -werkzeuge für Folio Open Source Library System
 
-## Hereinladen einer kompletten Beispielsequenz Titel - Lokaldaten - Exemplare
+## Loading a complete sample set with instances, holdings, items and instance relationships
 - mit Titelbeziehungen (Über- und Unterordnungen)
-- aus den Beispieldaten im Repo (FOLIO-JSON)
+- out of the same data in this repo (FOLIO-JSON)
 
 ```
-./createInstances.sh -d ~/folio-mig/sample_input/instances 
-./createInstanceRelationships.sh -d ~/folio-mig/sample_input/instanceRelationships 
-./createHoldings.sh -d ~/folio-mig/sample_input/holdings 
-./createItems.sh -d ~/folio-mig/sample_input/items
-grep error createItems.log
+# i. Create loadfiles:
+./createInstancesLoadfiles.sh -d ~/folio-mig/sample_input/instances
+# ii. Load records via loadfiles:
+./loadInstances.sh -s -v -d ~/folio-mig/sample_input/instances
+./createHoldingsLoadfiles.sh -d ~/folio-mig/sample_input/holdings
+./loadHoldings.sh -s -v -d ~/folio-mig/sample_input/holdings
+./createItemsLoadfiles.sh -d ~/folio-mig/sample_input/items
+./loadItems.sh -s -v -d ~/folio-mig/sample_input/items
+./createInstanceRelationships.sh -d ~/folio-mig/sample_input/instanceRelationships
 ```
 
-## Löschen der kompletten Beispielsequenz
+## Deleting the complete sample set
 - das Löschen ist in umgekehrter Reihenfolge vorzunehmen; so:
 
 ```
-./deleteItems.sh -d ~/folio-mig/sample_input/items 
-./deleteHoldings.sh -d ~/folio-mig/sample_input/holdings 
-./deleteInstanceRelationships.sh -d ~/folio-mig/sample_input/instanceRelationships 
-./deleteInstances.sh -d ~/folio-mig/sample_input/instances 
+./deleteItems.sh -d ~/folio-mig/sample_input/items
+./deleteHoldings.sh -d ~/folio-mig/sample_input/holdings
+./deleteInstanceRelationships.sh -d ~/folio-mig/sample_input/instanceRelationships
+./deleteInstances.sh -d ~/folio-mig/sample_input/instances
 ```
  
