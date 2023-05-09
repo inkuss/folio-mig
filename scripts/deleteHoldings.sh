@@ -86,16 +86,25 @@ if [ $deleteAll == 1 ]; then
   curl $curlopts -S -X DELETE -H "$TOKEN" -H "X-Okapi-Tenant: $TENANT" -H "Content-type: application/json; charset=utf-8" $OKAPI/holdings-storage/holdings
   echo
 elif [ $useFile == 1 ]; then
+  fileFull=$file
+  if [ $useDirectory == 1]; then
+    # also use directory; use directory as base directory for the file
+    fileFull=$directory/$file
+    echo "Verzeichnis=$directory"
+  fi
   echo "Datei=$file"
-  if [ ! -f $file ]; then
-    echo "ERROR: ($file) ist keine reguläre Datei!"
+  if [ ! -f $fileFull ]; then
+    echo "ERROR: ($fileFull) ist keine reguläre Datei!"
     exit 0
   fi
-  for id in `cat $file | jq ".holdings[].id"`; do
+  while IFS= read -r line; do
+    # echo "Text read from file: $line"
+    unset id
+    id=`echo $line | jq ".id"`
     id=$(stripOffQuotes $id)
     echo "Deleting ID: $id ..."
     ./deleteHolding.sh -t $TENANT $id
-  done
+  done < $fileFull
 elif [ $useDirectory ==1 ]; then
   for holding in $directory/*.json; do
     ./deleteHolding.sh -t $TENANT -f $holding
