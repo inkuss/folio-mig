@@ -54,4 +54,11 @@ Migrationsskripte und -werkzeuge für Folio Open Source Library System
 ./deleteInstanceRelationships.sh -d ~/folio-mig/sample_input/instanceRelationships
 ./deleteInstances.sh -d ~/folio-mig/sample_input/instances
 ```
- 
+
+- Use the -h option to learn about how to use the scripts. Get some sample calls and a description of all command line options and parameters:
+```
+./deleteItems.sh -h
+./deleteHoldings.sh -h
+./deleteInstanceRelationships.sh -h
+./deleteInstances.sh -h
+```
