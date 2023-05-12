@@ -1,7 +1,7 @@
 #!/bin/bash
-# Autor: I. Kuss, hbz
+# Autor: Ingolf Kuss (hbz)
 # Anlagedatum: 23.11.2020
-# Löscht ein Folio-Exemplar.
+# Beschreibung: Löscht ein Folio-Exemplar aus FOLIO Inventory Items.
 source funktionen.sh
 
 usage() {
@@ -15,7 +15,7 @@ usage() {
      Beispielaufruf:        ./deleteItem.sh -f ~/folio-mig/sample_input/items/4711.json
 
   Optionen:
-   - f [Datei]      Item-ID wird aus Datei gelesen
+   - f [Datei]      Item-ID wird aus Datei gelesen Standard: $useFile
    - h              Hilfe (dieser Text)
    - l [Datei]      login.json Datei mit Inhalt { "tenant" : "...", "username" : "...", "password" : "..." },
                     Standard $login_datei
@@ -37,8 +37,8 @@ folio_json_file=""
 verbose=0
 silent_off=0
 OKAPI=http://localhost:9130
-TENANT="diku";
-login_datei="login.json"
+TENANT=diku
+login_datei=login.json
 
 # Auswertung der Optionen und Kommandozeilenparameter
 OPTIND=1         # Reset in case getopts has been used previously in the shell.
