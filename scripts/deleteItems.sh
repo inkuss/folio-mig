@@ -88,7 +88,7 @@ if [ $verbose == 1 ]; then
 fi
 if [ $deleteAll == 1 ]; then
   TOKEN=$( curl -s -S -D - -H "X-Okapi-Tenant: $TENANT" -H "Content-type: application/json" -H "Accept: application/json" -d @$login_datei $OKAPI/authn/login | grep -i "^x-okapi-token: " )
-  curl $curlopts -S -X DELETE -H "$TOKEN" -H "X-Okapi-Tenant: $TENANT" -H "Content-type: application/json; charset=utf-8" $OKAPI/item-storage/items
+  curl $curlopts -S -X DELETE -H "$TOKEN" -H "X-Okapi-Tenant: $TENANT" -H "Content-type: text/plain; charset=utf-8" $OKAPI/item-storage/items
   echo
 elif [ $useFile == 1 ]; then
   actDir=$PWD
@@ -96,7 +96,7 @@ elif [ $useFile == 1 ]; then
     cd $directory
   fi
   if [ ! -f $file ]; then
-	  echo "ERROR: ($file) ist keine reguläre Datei!"
+    echo "ERROR: ($file) ist keine reguläre Datei!"
     exit 0
   fi
   while IFS= read -r line; do

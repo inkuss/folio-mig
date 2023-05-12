@@ -1,7 +1,7 @@
 #!/bin/bash
-# Autor: I. Kuss, hbz
+# Autor: Ingolf Kuss (hbz)
 # Anlagedatum: 23.11.2020
-# Löscht einen Folio-Lokaldatensatz (Holdings).
+# Beschreibung: Löscht einen Folio-Lokaldatensatz aus FOLIO Inventory Holdings.
 source funktionen.sh
 
 usage() {
@@ -37,8 +37,8 @@ folio_json_file=""
 verbose=0
 silent_off=0
 OKAPI=http://localhost:9130
-TENANT="diku";
-login_datei="login.json"
+TENANT=diku
+login_datei=login.json
 
 # Auswertung der Optionen und Kommandozeilenparameter
 OPTIND=1         # Reset in case getopts has been used previously in the shell.
